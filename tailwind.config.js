@@ -7,9 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      container: {
+        center: true, // Centers the container
+        padding: '0', // Removes default padding
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "var(--background)", // Ensure this variable is defined in your CSS
+        foreground: "var(--foreground)", // Ensure this variable is defined in your CSS
       },
     },
   },
