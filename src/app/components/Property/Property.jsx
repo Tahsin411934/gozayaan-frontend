@@ -5,6 +5,7 @@ import axios from 'axios';
 import { IoLocationOutline } from "react-icons/io5";
 import { MdAccessTime } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
+import Link from 'next/link';
 
 export default function Property() {
   const [data, setData] = useState([]);
@@ -22,9 +23,11 @@ export default function Property() {
   }, []);
 
   return (
+    
     <div className=''>
       {data.map((property) => (
         <div key={property.property_id} className="mb-10">
+          <Link href={`/Property/${property.property_id}`}>
           <div className='shadow-xl flex gap-5'>
             <Image
               src={`http://127.0.0.1:8000/storage/${property.main_img}`}
@@ -89,8 +92,10 @@ export default function Property() {
               )}
             </div>
           </div>
+          </Link>
         </div>
       ))}
     </div>
+    
   );
 }
