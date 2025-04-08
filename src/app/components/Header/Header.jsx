@@ -93,7 +93,7 @@ className="cursor-pointer"
                   </a>
                   <Link
                     href={`https://wa.me/${contactNumber?.Phone}`}
-                    className=" mx-[10px]"
+                    className=" mr-[10px] ml-[5px]"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -114,7 +114,7 @@ className="cursor-pointer"
               </div>
               {/* Mobile Menu Icon */}
               <div className="lg:hidden flex items-center mt-[10px]">
-                <span className="text-[8px] md:text-[16px]">Call any time</span>
+                
                 <a
                   target="_blank"
                   

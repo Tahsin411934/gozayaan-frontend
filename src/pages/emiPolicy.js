@@ -7,7 +7,7 @@ const Discover = () => {
   useEffect(() => {
     const fetchTerms = async () => {
       try {
-        const response = await fetch('https://freecvbd.com/admin/api/footer-policies');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/footer-policies`);
         const data = await response.json();
         if (data && data?.length > 0) {
           setTerms(data[3]?.value);

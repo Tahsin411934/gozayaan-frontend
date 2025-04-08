@@ -58,7 +58,7 @@ export default function Property() {
         try {
           setLoading(true);
           const response = await fetch(
-            "https://freecvbd.com/admin/api/popularPropertySummary/1"
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/popularPropertySummary/1`
           );
           const result = await response.json();
           setPopularData(result);
@@ -215,7 +215,7 @@ export default function Property() {
           <h4 className="text-[12px] sm:text-sm hidden md:hidden xl:block font-medium text-[#00026E] w-[21%] xl:w-[16%]">
             Price Range
           </h4>
-          <span className="text-[12px] sm:text-sm font-medium text-blue-600 w-[21%] md:[33%] xl:w-[20%]">
+          <span className="text-[12px] sm:text-sm  text-blue-600 font-bold w-[21%] md:[33%] xl:w-[20%]">
             {parseInt(price).toLocaleString()}
             {parseInt(price) > 9500 ? "+" : ""} TK
           </span>
@@ -259,7 +259,7 @@ export default function Property() {
         paginatedData.map((property, index) => (
           <div key={property.property_id} data-index={index} className="mb-5">
             {/* Property Card */}
-            <div className="shadow-custom flex flex-col lg:flex-row gap-5 p-5 rounded bg-white">
+            <div className="shadow-custom flex flex-col lg:flex-row gap-5 pt-5 pl-5 pr-5 pb-0 rounded bg-white">
               <div className="md:min-w-[400px] min-w-0 md:min-h-[300px] min-h-0">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${property.main_img}`}
@@ -348,7 +348,7 @@ export default function Property() {
                           </div>
                         ))}
                     </div>
-                    <div className="flex flex-row flex-wrap md:justify-start justify-around items-center gap-[5px] sm:gap-[25px] mt-[15px]">
+                    <div className="flex flex-row flex-wrap md:justify-between justify-start items-center gap-[5px] sm:gap-[25px] ">
                       {/* Buttons */}
                       <div>
                         <Link
@@ -380,7 +380,7 @@ export default function Property() {
                       <div className="md:hidden block mt-[10px]">
                         <a
                           href={`tel:${contactNumber?.Phone}`} // Use the `tel:` protocol
-                          className="mx-[10px]"
+                          className="mr-[-1px] ml-0"
                          
                         >
                           
@@ -401,14 +401,13 @@ export default function Property() {
                           </span>
                         </Link>
                       </div>
-                    </div>
-                    <div className="md:block hidden">
+                      <div className="md:block hidden">
                       <div className="flex justify-start md:justify-start">
                         <div className="flex items-center">
                           <span className="text-black md:text-[16px] text-[14px] font-bold">
                             For instant service:{" "}
                           </span>
-                          <div className="mx-[5px] mt-[10px]">
+                          <div className="mr-[5px] mt-[10px]">
                             <a
                              href={`tel:${contactNumber?.Phone}`} 
                               className="mx-[10px]"
@@ -427,7 +426,7 @@ export default function Property() {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <span className="btn-whatsapp-pulse btn-whatsapp-pulse-border md:w-[50px] md:h-[50px] w-[36px] h-[36px] md:mt-[0px] mt-[-5px] ml-[15px]">
+                              <span className="btn-whatsapp-pulse btn-whatsapp-pulse-border md:w-[50px] md:h-[50px] w-[36px] h-[36px] md:mt-[0px] mt-[-5px] ">
                                 <FaWhatsapp className="w-[25px] h-[25px] text-white" />
                               </span>
                             </Link>
@@ -435,6 +434,8 @@ export default function Property() {
                         </div>
                       </div>
                     </div>
+                    </div>
+                   
                   </div>
                 )}
               </div>

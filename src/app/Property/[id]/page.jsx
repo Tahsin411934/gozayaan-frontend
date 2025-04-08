@@ -92,7 +92,7 @@ export default function Page({ params }) {
     }
     fetchData();
   }, []);
-
+console.log(propertyPackages)
   return (
     <div>
       <div
@@ -156,18 +156,16 @@ export default function Page({ params }) {
                     } relative z-10 lg:my-0 my-[10px] md:mx-[10px] bg-white shadow-xl rounded-lg overflow-visible`}
                   >
                     {/* Discount Badge */}
-                    {pkg.discount?.length > 0 && (
-                      <div className="flex flex-col bg-red-700 h-14 justify-center rounded-full shadow-md text-white text-xs w-14 -right-3 -top-4 absolute font-semibold items-center py-2 z-40">
-                        <span>
-                          <>
-                            {Math.floor(pkg?.discount.at(-1)?.discount_percent)}
-                            %
-                          </>
-                        </span>
-                        <span className="text-[10px]">OFF</span>
-                      </div>
-                    )}
-
+                    {(pkg?.discount?.discount_percent > 0 || pkg?.discount?.discount_amount > 0) && (
+  <div className="flex flex-col bg-red-700 h-14 justify-center rounded-full shadow-md text-white text-xs w-14 -right-3 -top-4 absolute font-semibold items-center py-2 z-40">
+    <span>
+      {pkg.discount.discount_percent > 0 
+        ? `${Math.floor(pkg.discount.discount_percent)}%`
+        : `${Math.floor(pkg.discount.discount_amount)} TK`}
+    </span>
+    <span className="text-[10px]">OFF</span>
+  </div>
+)}
                     {/* Package Content */}
                     <div className="flex flex-col h-full items-center mx-auto">
                       <div className="block max-h-[60%] overflow-hidden">
@@ -175,7 +173,7 @@ export default function Page({ params }) {
                           src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${pkg.mainimg}`}
                           alt={pkg.unit_id}
                           fill
-                          className="rounded-t-lg w-[100%] lg:max-h-[55%] max-h-[55%] md:max-h-[50%] xl:max-h-[50%]"
+                          className="rounded-t-lg w-[100%] lg:max-h-[55%] max-h-[55%] md:max-h-[50%] xl:max-h-[43%]"
                         />
                       </div>
                       <div className="flex flex-1 flex-col p-[12px] shadow-lg lg:mt-[180px] md:mt-[140px] mt-[210px] xl:mt-[180px]">
@@ -221,39 +219,65 @@ export default function Page({ params }) {
                           </div>
                         </div>
                         <div className={`${roboto.className}`}>
-                          {pkg.price?.length > 0 ? (
-                            <p className="text-[16px] text-blue-950 font-semibold">
-                              {/* Check if the last discount exists */}
-                              <span>Price: </span>
-                              {pkg?.discount?.length > 0 ? (
-                                <>
-                                  {/* Display the original price with a red line-through */}
-                                  <span className="line-through text-red-500">
-                                    {Math.floor(pkg?.price[0]?.price)} TK
-                                  </span>{" "}
-                                  {/* Display the last discounted price */}
-                                  <span>
-                                    {Math.floor(pkg?.price[0]?.price) -
-                                      pkg?.discount.at(-1)
-                                        ?.discount_amount}{" "}
-                                    <span className="ml-[2px]">TK</span>
-                                  </span>
-                                </>
-                              ) : (
-                                // If no discount, just display the original price
-                                <span>
-                                  {Math.floor(pkg?.price[0]?.price)}TK
-                                </span>
-                              )}
-                              {/* Display "Per person" text */}
-                              <span className="text-[14px]"> (Per person)</span>
-                            </p>
-                          ) : (
-                            <p className="text-[15px] text-red-500">
-                              Price: Not Available
-                            </p>
-                          )}
-                        </div>
+  {pkg.price?.length > 0 ? (
+    <p className="text-[16px] text-blue-950 font-semibold">
+      <span>Price: </span>
+      {pkg?.discount ? (
+        (() => {
+          const discount = pkg.discount;
+          const hasAmountDiscount = discount?.discount_amount > 0;
+          const hasPercentDiscount = discount?.discount_percent > 0;
+          const hasAnyDiscount = hasAmountDiscount || hasPercentDiscount;
+          
+          let discountedPrice = pkg.price[0].price;
+          
+          if (hasAmountDiscount) {
+            discountedPrice = Math.floor(pkg.price[0].price - discount.discount_amount);
+          } 
+          else if (hasPercentDiscount) {
+            discountedPrice = Math.floor(pkg.price[0].price * (1 - (discount.discount_percent / 100)));
+          }
+          
+          return (
+            <>
+              {hasAnyDiscount ? (
+                <>
+                  <span className="line-through text-red-500 mr-1">
+                    {Math.floor(pkg.price[0].price)} TK
+                  </span>
+                  <span className="">
+                    {discountedPrice} TK
+                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                      {hasAmountDiscount 
+                        ? `${discount.discount_amount} TK OFF`
+                        : `${discount.discount_percent}% OFF`}
+                    </span>
+                  </span>
+                </>
+              ) : (
+                <span>
+                  {Math.floor(pkg.price[0].price)} TK
+                </span>
+              )}
+            </>
+          );
+        })()
+      ) : (
+        // Regular price without discount
+        <span>
+          {Math.floor(pkg.price[0].price)} TK
+        </span>
+      )}
+      {/* Per person indicator */}
+      <span className="text-gray-500 text-[14px] ml-1">(Per person)</span>
+    </p>
+  ) : (
+    // Price not available
+    <p className="text-[15px] text-red-500">
+      Price: Not Available
+    </p>
+  )}
+</div>
                       </div>
                     </div>
                   </div>
