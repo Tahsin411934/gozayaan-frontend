@@ -188,9 +188,9 @@ console.log(propertyPackages)
                           Unit Type: {pkg.unit_type} | Person Allowed:{" "}
                           {pkg.person_allowed} | Additional Bed:{" "}
                           {pkg?.additionalbed === 1
-                            ? "Available"
+                            ? "| Additional Bed: Available"
                             : pkg?.additionalbed === 0
-                            ? "Not Available"
+                            ? ""
                             : ""}
                         </p>
                         <div className="flex justify-start items-center">

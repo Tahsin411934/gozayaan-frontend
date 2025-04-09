@@ -350,7 +350,8 @@ export default function Property() {
                     </div>
                     <div className="flex flex-row flex-wrap md:justify-between justify-start items-center gap-[5px] sm:gap-[25px] ">
                       {/* Buttons */}
-                      <div>
+                      <div className="flex">
+                      <div className="mr-[6px]">
                         <Link
                           href={`/Property/${property.property_id}`}
                           style={{
@@ -376,6 +377,7 @@ export default function Property() {
                         >
                           Book Now
                         </Link>
+                      </div>
                       </div>
                       <div className="md:hidden block mt-[10px]">
                         <a
