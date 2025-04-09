@@ -1,20 +1,20 @@
 "use client";
 import { use, useEffect, useState, useRef } from "react";
-import ContactForm from "@/app/components/ContactForm/ContactForm";
-import getFacilities from "@/utiles/getFacilities";
-import getPropertyDetails from "@/utiles/getPropertyDetails";
-import { getPropertyImages } from "@/utiles/getPropertyImages";
-import ImageCarousel from "@/utiles/ImageCarousel";
+import ContactForm from "@/app/components/tour/ContactForm/ContactForm";
+import getFacilities from "@/services/tour/getFacilities";
+import getPropertyDetails from "@/services/tour/getPropertyDetails";
+import { getPropertyImages } from "@/services/tour/getPropertyImages";
+import ImageCarousel from "@/services/tour/ImageCarousel";
 import { IoLocation } from "react-icons/io5";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import getPropertyPackages from "@/utiles/getPropertyPackages";
+import getPropertyPackages from "@/services/tour/getPropertyPackages";
 import { FaWhatsapp } from "react-icons/fa";
 import { Roboto } from "next/font/google";
 import Image from "next/image";
-import getContactNumber from "@/utiles/getContactNumber";
+import getContactNumber from "@/services/tour/getContactNumber";
 import Link from "next/link";
-import AccordionBookMe from "@/utiles/Accordion";
+import AccordionBookMe from "@/services/tour/Accordion";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 

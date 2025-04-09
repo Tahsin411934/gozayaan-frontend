@@ -3,17 +3,17 @@
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import propertySummary from "@/utiles/propertySummary";
-import IconShow from "@/utiles/IconShow";
+import propertySummary from "@/services/tour/propertySummary";
+import IconShow from "@/services/tour/IconShow";
 import { TailSpin } from "react-loader-spinner";
 import { Roboto } from "next/font/google";
 import { RangeSlider } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import { useSearch } from "@/SearchContext";
-import getContactNumber from "@/utiles/getContactNumber";
+import getContactNumber from "@/services/tour/getContactNumber";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
 import Pagination from "../Pagination/Pagination";
-import { usePagination } from "@/utiles/usePagination";
+import { usePagination } from "@/services/tour/usePagination";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 

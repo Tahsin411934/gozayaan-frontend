@@ -7,9 +7,9 @@ import Link from "next/link";
 import { Roboto } from "next/font/google";
 import { useForm } from "react-hook-form";
 import { useSearch } from "@/SearchContext";
-import getContactNumber from "@/utiles/getContactNumber";
+import getContactNumber from "@/services/tour/getContactNumber";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
-import { usePagination } from "@/utiles/usePagination";
+import { usePagination } from "@/services/tour/usePagination";
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 const Header = () => {
   const { searchTerm, setSearchTerm } = useSearch();

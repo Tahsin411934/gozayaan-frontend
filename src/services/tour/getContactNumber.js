@@ -1,7 +1,7 @@
 const getContactNumber = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-attributes `,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/footer-policies `,
       {
         cache: "no-store", // Ensure no caching
       }
